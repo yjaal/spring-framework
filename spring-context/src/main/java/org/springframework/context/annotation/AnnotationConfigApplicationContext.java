@@ -60,9 +60,15 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	/**
 	 * Create a new AnnotationConfigApplicationContext that needs to be populated
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
+	 * 注意：这里首先要去调用父类中的构造方法，创建一个默认的 bean 工厂 DefaultListableBeanFactory
 	 */
 	public AnnotationConfigApplicationContext() {
+		/* AnnotatedBeanDefinitionReader 用于读取相关bean的定义，这里是读取注解定义的bean
+		* 这里只是将相关的注解配置转化为 BeanDefinition，后面还需要通过注册器（当前类就是注册器，因为实现类AnnotationConfigRegistry）
+		* 将BeanDefinition注册（add）到 DefaultListableBeanFactory 中的 beanDefinitionMap 中
+		* */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+		//ClassPathBeanDefinitionScanner 用于扫描相关包下面的 bean 定义
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 

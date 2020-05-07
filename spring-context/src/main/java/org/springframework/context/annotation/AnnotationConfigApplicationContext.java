@@ -90,6 +90,8 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
 		this();
+		//这里其实就是将一些默认的bean定义注册(add)到BeanFactory中
+		//同时我们传入到配置类也是一个bean，其bean定义也会被注册到BeanFactory中
 		register(annotatedClasses);
 		refresh();
 	}

@@ -20,8 +20,16 @@ import org.springframework.beans.BeansException;
 import org.springframework.lang.Nullable;
 
 /**
+ * 此类也被称为Bean后置处理器，如果自定义一个类实现此接口的两个方法，那么在Bean初始化
+ * 之前和之后会调用其中的方法，参考：https://www.jianshu.com/p/d26e8ec9c077
+ * 在容器启动的时候AbstractApplicationContext.refresh()方法中会调用
+ * AbstractAutowireCapableBeanFactory.doCreateBean()，其中会对bean进行
+ * 初始化，此时会有applyBeanPostProcessorsBeforeInitialization、
+ * applyBeanPostProcessorsAfterInitialization分别去调用此接口中的方法
+ *
  * Factory hook that allows for custom modification of new bean instances,
  * e.g. checking for marker interfaces or wrapping them with proxies.
+ * 允许自定义修改新bean实例到工厂钩子
  *
  * <p>ApplicationContexts can autodetect BeanPostProcessor beans in their
  * bean definitions and apply them to any beans subsequently created.

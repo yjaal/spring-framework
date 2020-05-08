@@ -59,6 +59,8 @@ import org.springframework.beans.factory.Aware;
 public interface ApplicationContextAware extends Aware {
 
 	/**
+	 * 当某个类实现了ApplicationContextAware接口时就会获得ApplicationContext，进而对其中对bean进行操作
+	 * 此方法会在 ApplicationContextAwareProcessor中调用
 	 * Set the ApplicationContext that this object runs in.
 	 * Normally this call will be used to initialize the object.
 	 * <p>Invoked after population of normal bean properties but before an init callback such

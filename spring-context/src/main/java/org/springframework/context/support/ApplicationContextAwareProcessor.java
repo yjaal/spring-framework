@@ -116,6 +116,9 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 			if (bean instanceof MessageSourceAware) {
 				((MessageSourceAware) bean).setMessageSource(this.applicationContext);
 			}
+			/*
+			 * 当某个类实现了ApplicationContextAware接口时就会获得ApplicationContext，进而对其中对bean进行操作
+			 */
 			if (bean instanceof ApplicationContextAware) {
 				((ApplicationContextAware) bean).setApplicationContext(this.applicationContext);
 			}

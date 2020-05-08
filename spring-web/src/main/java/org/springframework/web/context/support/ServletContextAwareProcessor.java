@@ -104,6 +104,7 @@ public class ServletContextAwareProcessor implements BeanPostProcessor {
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		// 凡是实现了ServletContextAware接口的类都可以获取到ServletContext，这样才能接受相关web请求
 		if (getServletContext() != null && bean instanceof ServletContextAware) {
 			((ServletContextAware) bean).setServletContext(getServletContext());
 		}

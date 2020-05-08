@@ -57,6 +57,19 @@ import org.springframework.web.context.ServletContextAware;
  * {@link org.springframework.context.support.AbstractApplicationContext},
  * this class detects a ThemeSource bean in the context, with the name "themeSource".
  *
+ * GenericApplicationContext继承自AbstractApplicationContext，是为通用目的设计的，它能加载各种配置文件，
+ * 例如xml，properties等等。它的内部持有一个DefaultListableBeanFactory的实例，实现了BeanDefinitionRegistry接口，
+ * 以便允许向其应用任何bean的定义的读取器。为了能够注册bean的定义，refresh()只允许调用一次
+ *
+ * 用法：
+ * GenericApplicationContext ctx = new GenericApplicationContext();
+ * XmlBeanDefinitionReader xmlReader = new XmlBeanDefinitionReader(ctx);
+ * xmlReader.loadBeanDefinitions(new ClassPathResource("applicationContext.xml"));
+ * PropertiesBeanDefinitionReader propReader = new PropertiesBeanDefinitionReader(ctx);
+ * propReader.loadBeanDefinitions(new ClassPathResource("otherBeans.properties"));
+ * ctx.refresh();
+ * MyBean myBean = (MyBean) ctx.getBean("myBean");
+ *
  * @author Juergen Hoeller
  * @author Chris Beams
  * @since 1.2
